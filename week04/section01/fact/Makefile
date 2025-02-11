@@ -1,7 +1,7 @@
-PROG = add3
-OBJS = add3.o add3_c.o add3_s.o add2_s.o
+PROG = fact
+OBJS = fact.o fact_c.o fact_s.o
 
-%.o : %.c
+%.o: %.c
 	gcc -c -g -o $@ $<
 
 %.o: %.s

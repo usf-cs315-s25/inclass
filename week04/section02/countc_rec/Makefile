@@ -1,8 +1,8 @@
-PROG = add3
-OBJS = add3.o add3_c.o add3_s.o add2_s.o
+PROG = countc
+OBJS = countc.o countc_c.o countc_s.o
 
-%.o : %.c
-	gcc -c -g -o $@ $<
+%.o: %.c
+	gcc -g -c -o $@ $<
 
 %.o: %.s
 	as -g -o $@ $<
