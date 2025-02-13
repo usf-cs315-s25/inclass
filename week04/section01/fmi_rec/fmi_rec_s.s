@@ -22,6 +22,7 @@ fmi_rec_s:
 not_max:
 
     addi a2, a2, 1  # set up idx + 1 in a2
+    mv a3, t0       # set up max_new in a3
     jal fmi_rec_s
     j done
 ret_max:
