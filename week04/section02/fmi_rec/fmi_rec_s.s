@@ -13,7 +13,7 @@ fmi_rec_s:
     sd ra, (sp)
     
     mv t0, a3           # t0 is max_new
-    blt a1, a2, done    # walked off the array?
+    blt a1, a2, ret_max # walked off the array?
 
     slli t1, a2, 2      # t1 is offset of idx'th elem
     add t1, a0, t1      # t1 is &arr[idx]
@@ -23,15 +23,16 @@ fmi_rec_s:
     add t2, a0, t2      # t2 is &arr[max_idx]
     lw t2, (t2)         # t2 is arr[max_idx]
 
-    ble t2, t1, nomax   # new max?
-    mv t0, t2           # new_max = idx
+    bge t2, t1, nomax   # new max?
+    mv t0, a2           # new_max = idx
 nomax:
     addi a2, a2, 1      # set up idx + 1
     mv a3, t0           # set up max_new in a3
     jal fmi_rec_s
-    mv t0, a0
+    j done
+ret_max:
+    mv a0, a3           # set up max_idx
 done:
     ld ra, (sp)
     addi sp, sp, 8
-    mv a0, t0           # set up max_idx ret val
     ret
